@@ -1,0 +1,3 @@
+D:/Projects/OpenGL/Simple3DGame/cmake-build-debug/CMakeFiles/Simple3DGame.dir
+D:/Projects/OpenGL/Simple3DGame/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Projects/OpenGL/Simple3DGame/cmake-build-debug/CMakeFiles/rebuild_cache.dir
