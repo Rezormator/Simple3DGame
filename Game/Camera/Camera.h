@@ -8,6 +8,7 @@ constexpr GLfloat DEFAULT_FOV{45.0f};
 constexpr GLfloat DEFAULT_NEAR_CLIP{0.1f};
 constexpr GLfloat DEFAULT_FAR_CLIP{100.0f};
 constexpr GLfloat ASPECT_RATIO{1920.0f / 1080.0f};
+constexpr GLfloat MOVMENT_SPEAD{0.02f};
 
 class Camera : public GameObject {
 private:
@@ -19,6 +20,8 @@ private:
     glm::mat4 view;
     glm::mat4 projection;
     GLvoid updateTransform() override;
+    GLvoid processInput();
+    GLvoid processMouseInput();
 public:
     explicit Camera(GLfloat fov = DEFAULT_FOV, const glm::vec3 &position = DEFAULT_POSITION,
                     const glm::vec3 &rotation = DEFAULT_ROTATION);

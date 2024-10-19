@@ -5,7 +5,7 @@
 #include "Objects/Rectangle/Rectangle.h"
 #include "Objects/Cube/Cube.h"
 #include "Camera/Camera.h"
-#include <glm/gtc/matrix_transform.hpp>
+#include "Input/Input.h"
 
 Game::Game(const char *title, const GLboolean fullscreen) {
     createWindow(title, fullscreen);
@@ -22,6 +22,7 @@ GLvoid Game::createWindow(const char *title, const GLboolean fullscreen) {
     if (!window)
         Error::massage("WINDOW", "FAILD_TO_CREATE");
     glfwMakeContextCurrent(window);
+    Input::setWindow(window);
 }
 
 GLvoid Game::loadGLAD() {
@@ -35,6 +36,7 @@ GLvoid Game::frameBufferSizeCallback(GLFWwindow *window, const GLint width, cons
 
 GLvoid Game::setCallbacks() const {
     glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
+    glfwSetCursorPosCallback(window, Input::mouseCallback);
 }
 
 GLFWwindow *Game::getWindow() const {
@@ -44,8 +46,8 @@ GLFWwindow *Game::getWindow() const {
 GLvoid Game::run() const {
     const auto camera = new Camera();
     const auto shader = new Shader("../Game/Shader/Shaders/shader.vert", "../Game/Shader/Shaders/shader.frag");
-    const auto texture = new Texture2D("../Game/Texture2D/Textures/tile.png");
-    const auto rectangle = new Rectangle(30.0f, 30.0f, texture, shader);
+    const auto texture = new Texture2D("../Game/Texture2D/Textures/tile.png", GL_REPEAT);
+    const auto rectangle = new Rectangle(1.0f, 1.0f, texture, shader);
     const auto cube = new Cube(1.0f, texture, shader);
 
     rectangle->setPosition(glm::vec3(0.0f, -1.0f, 0.0f));
@@ -56,16 +58,34 @@ GLvoid Game::run() const {
     // const auto projection = glm::perspective(glm::radians(45.0f), 1.777777f, 0.1f, 100.0f);
 
     glEnable(GL_DEPTH_TEST);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     while (!glfwWindowShouldClose(window)) {
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         camera->update();
         shader->setMat4("view", camera->getViewMat());
         shader->setMat4("projection", camera->getProjectionMat());
         cube->draw();
-        rectangle->draw();
+        for (GLfloat i = -15.0f; i <= 15.0f; i += 1.0f) {
+            for (GLfloat j = -15.0f; j <= 15.0f; j += 1.0f) {
+                rectangle->setPosition(glm::vec3(i, -1.0f, j));
+                rectangle->draw();
+            }
+        }
+
+        for (GLfloat i = -15.0f; i <= 15.0f; i += 1.0f) {
+            for (GLfloat j = -0.5f; j <= 5.5f; j += 1.0f) {
+                cube->setPosition(glm::vec3(i, j, 3.0f));
+                cube->draw();
+            }
+        }
+
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        if (Input::getKeyPress(GLFW_KEY_ESCAPE))
+            glfwSetWindowShouldClose(window, true);
     }
 
     delete shader;

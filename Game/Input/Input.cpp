@@ -1,5 +1,36 @@
-//
-// Created by admin on 19.10.2024.
-//
-
 #include "Input.h"
+
+GLFWwindow *Input::targetWindow;
+GLfloat Input::prevXPos;
+GLfloat Input::prevYPos;
+GLfloat Input::xOffset;
+GLfloat Input::yOffset;
+GLboolean Input::firstMove;
+
+GLvoid Input::setWindow(GLFWwindow *window) {
+    targetWindow = window;
+}
+
+bool Input::getKeyPress(const GLint key) {
+    return glfwGetKey(targetWindow, key) == GLFW_PRESS;
+}
+
+GLvoid Input::mouseCallback(GLFWwindow *window, const GLdouble xPos, const GLdouble yPos) {
+    const auto currentXPos = static_cast<GLfloat>(xPos);
+    const auto currentYPos = static_cast<GLfloat>(yPos);
+    if (firstMove) {
+        prevXPos = currentXPos;
+        prevYPos = currentYPos;
+        firstMove = false;
+    }
+    xOffset = currentXPos - prevXPos;
+    yOffset = prevYPos - currentYPos;
+}
+
+GLfloat Input::getXOffset() {
+    return xOffset;
+}
+
+GLfloat Input::getYOffset() {
+    return yOffset;
+}
