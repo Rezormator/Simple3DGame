@@ -7,17 +7,17 @@ GameObject::GameObject(const glm::vec3 &position, const glm::vec3 &rotation, con
 
 GLvoid GameObject::setPosition(const glm::vec3 &position) {
     this->position = position;
-    updateModel();
+    updateTransform();
 }
 
 GLvoid GameObject::setRotation(const glm::vec3 &rotation) {
     this->rotation = rotation;
-    updateModel();
+    updateTransform();
 }
 
 GLvoid GameObject::setScale(const glm::vec3 &scale) {
     this->scale = scale;
-    updateModel();
+    updateTransform();
 }
 
 glm::mat4 GameObject::getModel() const {
@@ -36,7 +36,7 @@ glm::vec3 GameObject::getScale() const {
     return scale;
 }
 
-GLvoid GameObject::updateModel() {
+GLvoid GameObject::updateTransform() {
     model = glm::mat4(1.0f);
     model = glm::translate(model, position);
     model = glm::rotate(model, glm::radians(rotation.x), X_AXIS);
@@ -46,5 +46,5 @@ GLvoid GameObject::updateModel() {
 }
 
 GLvoid GameObject::update() {
-    updateModel();
+    updateTransform();
 }

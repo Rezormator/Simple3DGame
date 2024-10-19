@@ -30,6 +30,8 @@ set(SOURCE_FILES ${SRC}/glad/glad.c
         Game/Objects/Rectangle/Rectangle.cpp
         Game/Objects/Rectangle/Rectangle.cpp
         Game/Camera/Camera.cpp
+        Game/Objects/Cube/Cube.h
+        Game/Objects/Cube/Cube.cpp
 )
 
 add_executable(Simple3DGame ${SOURCE_FILES} main.cpp)

@@ -1,7 +1,7 @@
 #include "Rectangle.h"
 
 Rectangle::Rectangle(const GLfloat width, const GLfloat height, Texture2D *texture2D, Shader *shader)
-    : width(width), height(height), texture2D(texture2D), shader(shader){
+: width(width), height(height), texture2D(texture2D), shader(shader){
     createRectangle();
 }
 

@@ -12,13 +12,12 @@ constexpr glm::vec3 Y_AXIS{0.0f, 1.0f, 0.0f};
 constexpr glm::vec3 Z_AXIS{0.0f, 0.0f, 1.0f};
 
 class GameObject {
-private:
-    GLvoid updateModel();
 protected:
     glm::mat4 model;
     glm::vec3 position;
     glm::vec3 rotation;
     glm::vec3 scale;
+    virtual GLvoid updateTransform();
 public:
     explicit GameObject(const glm::vec3 &position = DEFAULT_POSITION, const glm::vec3 &rotation = DEFAULT_ROTATION,
         const glm::vec3 &scale = DEFAULT_SCALE);
