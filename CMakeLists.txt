@@ -11,21 +11,25 @@ include_directories(${SRC})
 
 set(SOURCE_FILES ${SRC}/glad/glad.c
         ${SRC}/stb/stb_image.cpp
+        ${SRC}/stb/stb_image.h
         utils/utils.h
         Error/Error.h
         Error/Error.cpp
         Game/Game.h
         Game/Game.cpp
-        Game/GameDefaults.h
         Application/Application.h
         Application/Application.cpp
-        stb/stb_image.h
         Game/GameObject/GameObject.h
         Game/GameObject/GameObject.cpp
-        Game/GameObject/GameObjectDefaults.h
         Game/Shader/Shader.h
         Game/Shader/Shader.cpp
         Game/Shader/Shader.cpp
+        Game/Texture2D/Texture2D.h
+        Game/Texture2D/Texture2D.cpp
+        Game/Objects/Rectangle/Rectangle.h
+        Game/Objects/Rectangle/Rectangle.cpp
+        Game/Objects/Rectangle/Rectangle.cpp
+        Game/Camera/Camera.cpp
 )
 
 add_executable(Simple3DGame ${SOURCE_FILES} main.cpp)

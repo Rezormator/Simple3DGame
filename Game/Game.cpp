@@ -1,5 +1,8 @@
 #include "Game.h"
 #include "../Error/Error.h"
+#include "Shader/Shader.h"
+#include "Texture2D/Texture2D.h"
+#include "Objects/Rectangle/Rectangle.h"
 
 Game::Game(const char *title, const GLboolean fullscreen) {
     createWindow(title, fullscreen);
@@ -36,10 +39,21 @@ GLFWwindow *Game::getWindow() const {
 }
 
 GLvoid Game::run() const {
+    const auto shader = new Shader("../Game/Shader/Shaders/shader.vert", "../Game/Shader/Shaders/shader.frag");
+    const auto texture = new Texture2D("../Game/Texture2D/Textures/tile.png");
+    const auto rectangle = new Rectangle(1.0f, 1.0f, texture, shader);
+
     while (!glfwWindowShouldClose(window)) {
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        rectangle->draw();
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
+    delete shader;
+    delete texture;
+    delete rectangle;
 }
 
 GLvoid Game::shut() const {

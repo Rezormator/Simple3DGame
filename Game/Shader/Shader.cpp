@@ -3,11 +3,14 @@
 #include <sstream>
 #include "../../Error/Error.h"
 #include <glm/gtc/type_ptr.hpp>
+#include <iostream>
 
 
 Shader::Shader(const char *vertPath, const char *fragPath) {
-    const char *vertCode = loadCode(vertPath).c_str();
-    const char *fragCode = loadCode(fragPath).c_str();
+    const std::string vertCodeStr = loadCode(vertPath);
+    const std::string fragCodeStr = loadCode(fragPath);
+    const char *vertCode = vertCodeStr.c_str();
+    const char *fragCode = fragCodeStr.c_str();
     const GLuint vertShader = compileShader(vertCode, GL_VERTEX_SHADER);
     const GLuint fragShader = compileShader(fragCode, GL_FRAGMENT_SHADER);
     createProgram(vertShader, fragShader);
@@ -21,8 +24,7 @@ std::string Shader::loadCode(const char *path) {
         codeStream.open(path);
         shaderCode << codeStream.rdbuf();
         codeStream.close();
-    }
-    catch (std::ifstream::failure &e) {
+    } catch (std::ifstream::failure &e) {
         Error::massage("SHADER", "LOAD_CODE_FAILED");
     }
     return shaderCode.str();
@@ -34,7 +36,7 @@ GLuint Shader::compileShader(const char *code, const GLuint shaderType) {
     glCompileShader(shader);
     GLint compiled;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
-    if(compiled) {
+    if (!compiled) {
         char infoLog[BUFSIZ];
         glGetShaderInfoLog(shader, BUFSIZ, nullptr, infoLog);
         Error::massage("SHADER", "COMPILE_FAILED");
@@ -42,14 +44,14 @@ GLuint Shader::compileShader(const char *code, const GLuint shaderType) {
     return shader;
 }
 
-GLvoid Shader::createProgram(GLuint vertShader, GLuint fragShader) {
+GLvoid Shader::createProgram(const GLuint vertShader, const GLuint fragShader) {
     ID = glCreateProgram();
     glAttachShader(ID, vertShader);
     glAttachShader(ID, fragShader);
     glLinkProgram(ID);
     GLint linked;
     glGetProgramiv(ID, GL_LINK_STATUS, &linked);
-    if(!linked) {
+    if (!linked) {
         char infoLog[BUFSIZ];
         glGetProgramInfoLog(ID, BUFSIZ, nullptr, infoLog);
         Error::massage("SHADER_PROGRAM", "LINKED_FAILED");
@@ -65,12 +67,15 @@ GLvoid Shader::use() const {
 GLvoid Shader::setFloat(const char *name, const GLfloat value) const {
     glUniform1f(glGetUniformLocation(ID, name), value);
 }
+
 GLvoid Shader::setInt(const char *name, const GLint value) const {
     glUniform1i(glGetUniformLocation(ID, name), value);
 }
+
 GLvoid Shader::setMat4(const char *name, const glm::mat4 &value) const {
     glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, glm::value_ptr(value));
 }
+
 GLvoid Shader::setVec3(const char *name, const glm::vec3 &value) const {
     glUniform3fv(glGetUniformLocation(ID, name), 1, glm::value_ptr(value));
 }

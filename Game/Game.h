@@ -2,8 +2,10 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "GameDefaults.h"
 #include "../utils/utils.h"
+
+constexpr auto DEFAULT_TITLE = "Simple3DGame";
+constexpr GLboolean FULL_SCREEN = true;
 
 class Game {
 private:

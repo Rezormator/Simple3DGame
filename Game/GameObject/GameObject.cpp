@@ -44,3 +44,7 @@ GLvoid GameObject::updateModel() {
     model = glm::rotate(model, glm::radians(rotation.z), Z_AXIS);
     model = glm::scale(model, scale);
 }
+
+GLvoid GameObject::update() {
+    updateModel();
+}

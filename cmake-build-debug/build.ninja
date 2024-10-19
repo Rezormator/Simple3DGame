@@ -98,6 +98,27 @@ build CMakeFiles/Simple3DGame.dir/Game/Shader/Shader.cpp.obj: CXX_COMPILER__Simp
   OBJECT_DIR = CMakeFiles\Simple3DGame.dir
   OBJECT_FILE_DIR = CMakeFiles\Simple3DGame.dir\Game\Shader
 
+build CMakeFiles/Simple3DGame.dir/Game/Texture2D/Texture2D.cpp.obj: CXX_COMPILER__Simple3DGame_unscanned_Debug D$:/Projects/OpenGL/Simple3DGame/Game/Texture2D/Texture2D.cpp || cmake_object_order_depends_target_Simple3DGame
+  DEP_FILE = CMakeFiles\Simple3DGame.dir\Game\Texture2D\Texture2D.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -ID:/OpenGL/includes
+  OBJECT_DIR = CMakeFiles\Simple3DGame.dir
+  OBJECT_FILE_DIR = CMakeFiles\Simple3DGame.dir\Game\Texture2D
+
+build CMakeFiles/Simple3DGame.dir/Game/Objects/Rectangle/Rectangle.cpp.obj: CXX_COMPILER__Simple3DGame_unscanned_Debug D$:/Projects/OpenGL/Simple3DGame/Game/Objects/Rectangle/Rectangle.cpp || cmake_object_order_depends_target_Simple3DGame
+  DEP_FILE = CMakeFiles\Simple3DGame.dir\Game\Objects\Rectangle\Rectangle.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -ID:/OpenGL/includes
+  OBJECT_DIR = CMakeFiles\Simple3DGame.dir
+  OBJECT_FILE_DIR = CMakeFiles\Simple3DGame.dir\Game\Objects\Rectangle
+
+build CMakeFiles/Simple3DGame.dir/Game/Camera/Camera.cpp.obj: CXX_COMPILER__Simple3DGame_unscanned_Debug D$:/Projects/OpenGL/Simple3DGame/Game/Camera/Camera.cpp || cmake_object_order_depends_target_Simple3DGame
+  DEP_FILE = CMakeFiles\Simple3DGame.dir\Game\Camera\Camera.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -ID:/OpenGL/includes
+  OBJECT_DIR = CMakeFiles\Simple3DGame.dir
+  OBJECT_FILE_DIR = CMakeFiles\Simple3DGame.dir\Game\Camera
+
 build CMakeFiles/Simple3DGame.dir/main.cpp.obj: CXX_COMPILER__Simple3DGame_unscanned_Debug D$:/Projects/OpenGL/Simple3DGame/main.cpp || cmake_object_order_depends_target_Simple3DGame
   DEP_FILE = CMakeFiles\Simple3DGame.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
@@ -113,7 +134,7 @@ build CMakeFiles/Simple3DGame.dir/main.cpp.obj: CXX_COMPILER__Simple3DGame_unsca
 #############################################
 # Link the executable Simple3DGame.exe
 
-build Simple3DGame.exe: CXX_EXECUTABLE_LINKER__Simple3DGame_Debug CMakeFiles/Simple3DGame.dir/D_/OpenGL/includes/glad/glad.c.obj CMakeFiles/Simple3DGame.dir/D_/OpenGL/includes/stb/stb_image.cpp.obj CMakeFiles/Simple3DGame.dir/Error/Error.cpp.obj CMakeFiles/Simple3DGame.dir/Game/Game.cpp.obj CMakeFiles/Simple3DGame.dir/Application/Application.cpp.obj CMakeFiles/Simple3DGame.dir/Game/GameObject/GameObject.cpp.obj CMakeFiles/Simple3DGame.dir/Game/Shader/Shader.cpp.obj CMakeFiles/Simple3DGame.dir/main.cpp.obj
+build Simple3DGame.exe: CXX_EXECUTABLE_LINKER__Simple3DGame_Debug CMakeFiles/Simple3DGame.dir/D_/OpenGL/includes/glad/glad.c.obj CMakeFiles/Simple3DGame.dir/D_/OpenGL/includes/stb/stb_image.cpp.obj CMakeFiles/Simple3DGame.dir/Error/Error.cpp.obj CMakeFiles/Simple3DGame.dir/Game/Game.cpp.obj CMakeFiles/Simple3DGame.dir/Application/Application.cpp.obj CMakeFiles/Simple3DGame.dir/Game/GameObject/GameObject.cpp.obj CMakeFiles/Simple3DGame.dir/Game/Shader/Shader.cpp.obj CMakeFiles/Simple3DGame.dir/Game/Texture2D/Texture2D.cpp.obj CMakeFiles/Simple3DGame.dir/Game/Objects/Rectangle/Rectangle.cpp.obj CMakeFiles/Simple3DGame.dir/Game/Camera/Camera.cpp.obj CMakeFiles/Simple3DGame.dir/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lglfw3  -lopengl32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   LINK_PATH = -LD:/OpenGL/lib
