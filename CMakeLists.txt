@@ -11,24 +11,20 @@ include_directories(${SRC})
 
 set(SOURCE_FILES ${SRC}/glad/glad.c
         ${SRC}/stb/stb_image.cpp
-        Application/Application.h
-        Application/Application.cpp
+        utils/utils.h
+        Error/Error.h
+        Error/Error.cpp
         Game/Game.h
         Game/Game.cpp
-        utils/utils.h
-        Game/Screen/Screen.h
-        Game/Screen/Screen.cpp
-        Game/Camera/Camera.h
-        Game/Camera/Camera.cpp
-        Game/GameObject.h
-        Game/GameObject.cpp
-        Game/Texture/Texture2D.cpp
-        Game/Texture/Texture2D.cpp
-        Game/Objects/Rectangle/Rectangle.h
-        Game/Objects/Rectangle/Rectangle.cpp
-        Game/Shader/Shader.h
-        Game/Shader/Shader.cpp
-        Dispose/IDisposable.h)
+        Game/GameDefaults.h
+        Application/Application.h
+        Application/Application.cpp
+        stb/stb_image.cpp
+        stb/stb_image.h
+        Game/GameObject/GameObject.h
+        Game/GameObject/GameObject.cpp
+        Game/GameObject/GameObjectDefaults.h
+)
 
 add_executable(Simple3DGame ${SOURCE_FILES} main.cpp)
 target_link_libraries(Simple3DGame glfw3 opengl32)

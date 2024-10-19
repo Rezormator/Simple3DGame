@@ -1,8 +1,8 @@
 #include "Application/Application.h"
 
 int main() {
-    Application::create("Simple 3D game");
+    Application::crate();
     Application::run();
-    Application::terminate();
+    Application::shut();
     return 0;
 }

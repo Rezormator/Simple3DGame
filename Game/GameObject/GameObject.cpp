@@ -1,11 +1,11 @@
 #include "GameObject.h"
-#include <glm/glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 GameObject::GameObject(const glm::vec3 &position, const glm::vec3 &rotation, const glm::vec3 &scale)
-    : position(position), rotation(rotation), scale(scale) {
+: position(position), rotation(rotation), scale(scale) {
 }
 
-GLvoid GameObject::setPostion(const glm::vec3 &position) {
+GLvoid GameObject::setPosition(const glm::vec3 &position) {
     this->position = position;
     updateModel();
 }
@@ -20,7 +20,11 @@ GLvoid GameObject::setScale(const glm::vec3 &scale) {
     updateModel();
 }
 
-glm::vec3 GameObject::getPostion() const {
+glm::mat4 GameObject::getModel() const {
+    return model;
+}
+
+glm::vec3 GameObject::getPosition() const {
     return position;
 }
 
@@ -32,14 +36,11 @@ glm::vec3 GameObject::getScale() const {
     return scale;
 }
 
-glm::mat4 GameObject::getModel() const {
-    return model;
-}
-
 GLvoid GameObject::updateModel() {
-    model = glm::translate(glm::mat4(1.0f), position);
-    model = glm::rotate(model, rotation.x, X_AXIS);
-    model = glm::rotate(model, rotation.y, Y_AXIS);
-    model = glm::rotate(model, rotation.z, Z_AXIS);
+    model = glm::mat4(1.0f);
+    model = glm::translate(model, position);
+    model = glm::rotate(model, glm::radians(rotation.x), X_AXIS);
+    model = glm::rotate(model, glm::radians(rotation.y), Y_AXIS);
+    model = glm::rotate(model, glm::radians(rotation.z), Z_AXIS);
     model = glm::scale(model, scale);
 }
