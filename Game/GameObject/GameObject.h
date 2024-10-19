@@ -2,10 +2,8 @@
 
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
-#include "../utils/utils.h"
+#include "../../utils/utils.h"
 #include "GameObjectDefaults.h"
-
-using namespace GameObjectDefaults;
 
 class GameObject {
 private:

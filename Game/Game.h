@@ -5,8 +5,6 @@
 #include "GameDefaults.h"
 #include "../utils/utils.h"
 
-using namespace GameDefaults;
-
 class Game {
 private:
     GLFWwindow *window;

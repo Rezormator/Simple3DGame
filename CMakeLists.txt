@@ -19,11 +19,13 @@ set(SOURCE_FILES ${SRC}/glad/glad.c
         Game/GameDefaults.h
         Application/Application.h
         Application/Application.cpp
-        stb/stb_image.cpp
         stb/stb_image.h
         Game/GameObject/GameObject.h
         Game/GameObject/GameObject.cpp
         Game/GameObject/GameObjectDefaults.h
+        Game/Shader/Shader.h
+        Game/Shader/Shader.cpp
+        Game/Shader/Shader.cpp
 )
 
 add_executable(Simple3DGame ${SOURCE_FILES} main.cpp)
