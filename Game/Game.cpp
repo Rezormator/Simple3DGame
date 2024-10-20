@@ -6,6 +6,7 @@
 #include "Objects/Cube/Cube.h"
 #include "Camera/Camera.h"
 #include "Input/Input.h"
+#include "Scene/Scene.h"
 #include "Screen/Screen.h"
 
 Game::Game(const char *title, const GLboolean fullscreen) {
@@ -47,37 +48,13 @@ GLFWwindow *Game::getWindow() const {
 }
 
 GLvoid Game::run() const {
-    const auto camera = new Camera();
-    const auto shader = new Shader("../Game/Shader/Shaders/shader.vert", "../Game/Shader/Shaders/shader.frag");
-    const auto texture = new Texture2D("../Game/Texture2D/Textures/img.png");
-    const auto rectangle = new Rectangle(1.0f, 1.0f, texture, shader);
-    const auto cube = new Cube(1.0f, texture, shader);
-
-    rectangle->setPosition(glm::vec3(0.0f, -1.0f, 0.0f));
-    rectangle->setRotation(glm::vec3(90.0f, 0.0f, 0.0f));
-    cube->setPosition(glm::vec3(3.0f, -0.5f, -1.0f));
+    Scene::create();
 
     glEnable(GL_DEPTH_TEST);
     while (!glfwWindowShouldClose(window)) {
         Screen::clear();
 
-        camera->update();
-        shader->setMat4("view", camera->getViewMat());
-        shader->setMat4("projection", camera->getProjectionMat());
-        cube->draw();
-        for (GLfloat i = -15.0f; i <= 15.0f; i += 1.0f) {
-            for (GLfloat j = -15.0f; j <= 15.0f; j += 1.0f) {
-                rectangle->setPosition(glm::vec3(i, -1.0f, j));
-                rectangle->draw();
-            }
-        }
-
-        for (GLfloat i = -15.0f; i <= 15.0f; i += 1.0f) {
-            for (GLfloat j = -0.5f; j <= 5.5f; j += 1.0f) {
-                cube->setPosition(glm::vec3(i, j, 3.0f));
-                cube->draw();
-            }
-        }
+        Scene::draw();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -86,11 +63,7 @@ GLvoid Game::run() const {
             glfwSetWindowShouldClose(window, true);
     }
 
-    delete shader;
-    delete texture;
-    delete rectangle;
-    delete cube;
-    delete camera;
+    Scene::despose();
 }
 
 GLvoid Game::shut() const {
