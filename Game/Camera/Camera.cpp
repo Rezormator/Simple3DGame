@@ -1,9 +1,11 @@
 #include "Camera.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "../Input/Input.h"
+#include "../Screen/Screen.h"
 
 Camera::Camera(const GLfloat fov, const glm::vec3 &position, const glm::vec3 &rotation)
-    : GameObject(position, rotation), front(0.0f, 0.0f, -1.0f), up(WORLD_UP), worldUp(WORLD_UP), view(1.0f), projection(1.0f) {
+    : GameObject(position, rotation), front(0.0f, 0.0f, -1.0f), up(WORLD_UP), worldUp(WORLD_UP), view(1.0f),
+      projection(1.0f) {
     setFov(fov);
 }
 
@@ -18,7 +20,7 @@ GLvoid Camera::updateTransform() {
     right = glm::normalize(glm::cross(front, worldUp));
     up = glm::normalize(glm::cross(right, front));
     view = glm::lookAt(position, position + front, up);
-    projection = glm::perspective(fov, ASPECT_RATIO, DEFAULT_NEAR_CLIP, DEFAULT_FAR_CLIP);
+    projection = glm::perspective(fov, Screen::getAspectRatio(), DEFAULT_NEAR_CLIP, DEFAULT_FAR_CLIP);
 }
 
 GLvoid Camera::processInput() {
@@ -37,12 +39,12 @@ GLvoid Camera::processInput() {
         position = glm::vec3(position.x, position.y + MOVMENT_SPEAD, position.z);
     if (Input::getKeyPress(GLFW_KEY_LEFT_SHIFT))
         position = glm::vec3(position.x, position.y - MOVMENT_SPEAD, position.z);
-    position = glm::vec3(position.x, 0.0f, position.z);
+    // position = glm::vec3(position.x, 0.0f, position.z);
 }
 
 GLvoid Camera::processMouseInput() {
-    rotation.x = Input::getYOffset() * 0.001f;
-    rotation.y = Input::getXOffset() * -0.001f;
+    rotation.x = Input::getYOffset() * SENSITIVITY;
+    rotation.y = Input::getXOffset() * -SENSITIVITY;
 }
 
 

@@ -3,12 +3,12 @@
 #include "../GameObject/GameObject.h"
 #include "../../utils/utils.h"
 
-constexpr glm::vec3 WORLD_UP{0.0f, 1.0f, 0.0f};
-constexpr GLfloat DEFAULT_FOV{45.0f};
-constexpr GLfloat DEFAULT_NEAR_CLIP{0.1f};
-constexpr GLfloat DEFAULT_FAR_CLIP{100.0f};
-constexpr GLfloat ASPECT_RATIO{1920.0f / 1080.0f};
-constexpr GLfloat MOVMENT_SPEAD{0.02f};
+constexpr auto WORLD_UP = glm::vec3(0.0f, 1.0f, 0.0f);
+constexpr GLfloat DEFAULT_FOV = 45.0f;
+constexpr GLfloat DEFAULT_NEAR_CLIP = 0.1f;
+constexpr GLfloat DEFAULT_FAR_CLIP = 100.0f;
+constexpr GLfloat MOVMENT_SPEAD = 0.02f;
+constexpr GLfloat SENSITIVITY = 0.001f;
 
 class Camera : public GameObject {
 private:

@@ -34,6 +34,8 @@ set(SOURCE_FILES ${SRC}/glad/glad.c
         Game/Objects/Cube/Cube.cpp
         Game/Input/Input.cpp
         Game/Input/Input.h
+        Game/Screen/Screen.h
+        Game/Screen/Screen.cpp
 )
 
 add_executable(Simple3DGame ${SOURCE_FILES} main.cpp)

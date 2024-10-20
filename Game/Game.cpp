@@ -6,6 +6,7 @@
 #include "Objects/Cube/Cube.h"
 #include "Camera/Camera.h"
 #include "Input/Input.h"
+#include "Screen/Screen.h"
 
 Game::Game(const char *title, const GLboolean fullscreen) {
     createWindow(title, fullscreen);
@@ -23,6 +24,7 @@ GLvoid Game::createWindow(const char *title, const GLboolean fullscreen) {
         Error::massage("WINDOW", "FAILD_TO_CREATE");
     glfwMakeContextCurrent(window);
     Input::setWindow(window);
+    Screen::update(width, height, DEFAULT_COLOR);
 }
 
 GLvoid Game::loadGLAD() {
@@ -37,6 +39,7 @@ GLvoid Game::frameBufferSizeCallback(GLFWwindow *window, const GLint width, cons
 GLvoid Game::setCallbacks() const {
     glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
     glfwSetCursorPosCallback(window, Input::mouseCallback);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 GLFWwindow *Game::getWindow() const {
@@ -46,7 +49,7 @@ GLFWwindow *Game::getWindow() const {
 GLvoid Game::run() const {
     const auto camera = new Camera();
     const auto shader = new Shader("../Game/Shader/Shaders/shader.vert", "../Game/Shader/Shaders/shader.frag");
-    const auto texture = new Texture2D("../Game/Texture2D/Textures/tile.png", GL_REPEAT);
+    const auto texture = new Texture2D("../Game/Texture2D/Textures/img.png");
     const auto rectangle = new Rectangle(1.0f, 1.0f, texture, shader);
     const auto cube = new Cube(1.0f, texture, shader);
 
@@ -54,14 +57,9 @@ GLvoid Game::run() const {
     rectangle->setRotation(glm::vec3(90.0f, 0.0f, 0.0f));
     cube->setPosition(glm::vec3(3.0f, -0.5f, -1.0f));
 
-    // const auto view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f));
-    // const auto projection = glm::perspective(glm::radians(45.0f), 1.777777f, 0.1f, 100.0f);
-
     glEnable(GL_DEPTH_TEST);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     while (!glfwWindowShouldClose(window)) {
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        Screen::clear();
 
         camera->update();
         shader->setMat4("view", camera->getViewMat());

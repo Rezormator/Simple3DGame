@@ -2,10 +2,12 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include "../utils/utils.h"
 
 constexpr auto DEFAULT_TITLE = "Simple3DGame";
 constexpr GLboolean FULL_SCREEN = true;
+constexpr glm::vec3 DEFAULT_COLOR = {0.3f, 0.6f, 0.6f};
 
 class Game {
 private:
