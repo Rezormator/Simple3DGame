@@ -2,6 +2,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "../Input/Input.h"
 #include "../Screen/Screen.h"
+#include "../Time/Time.h"
 
 Camera::Camera(const GLfloat fov, const glm::vec3 &position, const glm::vec3 &rotation)
     : GameObject(position, rotation), front(0.0f, 0.0f, -1.0f), up(WORLD_UP), worldUp(WORLD_UP), view(1.0f),
@@ -24,7 +25,7 @@ GLvoid Camera::updateTransform() {
 }
 
 GLvoid Camera::processInput() {
-    GLfloat movmentSpeed = MOVMENT_SPEAD;
+    GLfloat movmentSpeed = MOVMENT_SPEAD * Time::getDeltaTime();
     if (Input::getKeyPress(GLFW_KEY_LEFT_CONTROL))
         movmentSpeed += 0.2f;
     if (Input::getKeyPress(GLFW_KEY_W))

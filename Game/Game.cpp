@@ -1,13 +1,10 @@
 #include "Game.h"
 #include "../Error/Error.h"
 #include "Shader/Shader.h"
-#include "Texture2D/Texture2D.h"
-#include "Objects/Rectangle/Rectangle.h"
-#include "Objects/Cube/Cube.h"
-#include "Camera/Camera.h"
 #include "Input/Input.h"
 #include "Scene/Scene.h"
 #include "Screen/Screen.h"
+#include "Time/Time.h"
 
 Game::Game(const char *title, const GLboolean fullscreen) {
     createWindow(title, fullscreen);
@@ -53,6 +50,7 @@ GLvoid Game::run() const {
     glEnable(GL_DEPTH_TEST);
     while (!glfwWindowShouldClose(window)) {
         Screen::clear();
+        Time::calculateDeltaTime();
 
         Scene::draw();
 
